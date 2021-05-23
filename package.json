@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "min-dash": "^3.5.2",
-    "moddle": "^5.0.2",
+    "moddle": "github:fra-pa/moddle#feat-multiple-inherited-properties",
     "saxen": "^8.1.2"
   }
 }
