@@ -2011,7 +2011,7 @@ describe('Reader', function() {
 
       var xml =
         '<b:Root xmlns:b="http://base" xmlns:c="http://custom" ' +
-                'c:customAttr="666">' +
+                'customAttr="555" c:customAttr="666">' +
         '</b:Root>';
 
       // when
@@ -2021,9 +2021,9 @@ describe('Reader', function() {
 
       expect(rootElement).to.jsonEqual({
         $type: 'b:Root',
-        customAttr: 666
+        'customAttr': 555,
+        'c:customAttr': 666
       });
-
     });
 
 
