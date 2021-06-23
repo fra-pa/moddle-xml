@@ -152,6 +152,17 @@
           "type": "String",
           "isAttr": true,
           "isId": true
+        },
+        {
+          "name": "single",
+          "type": "Integer",
+          "isAttr": true
+        },
+        {
+          "name": "defaultSingle",
+          "type": "Integer",
+          "default": 42,
+          "isAttr": true
         }
       ]
     },
