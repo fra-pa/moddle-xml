@@ -43,6 +43,29 @@ describe('Multiple Inherited Properties', function() {
       expect(xml).to.eql(expectedXml);
     });
 
+    it('should write non-attribute property as child element', function() {
+
+      // given
+      var writer = createWriter(model);
+
+      var root = model.create('mh:MultipleInherited', {
+        'nonAttrSingle': 'mh-nonAttrSingle',
+        'props:nonAttrSingle': 42
+      });
+
+      // when
+      var xml = writer.toXML(root);
+
+      var expectedXml =
+          '<mh:MultipleInherited xmlns:mh="http://multipleinheritance"' +
+          ' xmlns:props="http://properties">' +
+          '<props:nonAttrSingle>42</props:nonAttrSingle>' +
+          '<mh:nonAttrSingle>mh-nonAttrSingle</mh:nonAttrSingle>' +
+          '</mh:MultipleInherited>';
+
+      // then
+      expect(xml).to.eql(expectedXml);
+    });
   }); // describe(multiple inherited properties/Writer)
 
   describe('Reader', function() {

@@ -163,6 +163,10 @@
           "type": "Integer",
           "default": 42,
           "isAttr": true
+        },
+        {
+          "name": "nonAttrSingle",
+          "type": "Integer"
         }
       ]
     },
