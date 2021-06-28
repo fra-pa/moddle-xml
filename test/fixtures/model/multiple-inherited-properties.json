@@ -4,18 +4,8 @@
   "prefix": "mh",
   "types": [
     {
-      "name": "AnotherRoot",
-      "properties": [
-        {
-          "name": "any",
-          "type": "AnotherRoot",
-          "isMany": true
-        }
-      ]
-    },
-    {
       "name": "MultipleInherited",
-      "superClass": [ "AnotherRoot", "props:Root" ],
+      "superClass": [ "props:Root" ],
       "properties": [
         {
           "name": "single",
@@ -31,6 +21,12 @@
         {
           "name": "nonAttrSingle",
           "type": "Integer"
+        },
+        {
+          "name": "many",
+          "type": "Integer",
+          "isMany": true,
+          "xml": { "serialize" : "property" }
         }
       ]
     }

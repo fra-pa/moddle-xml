@@ -148,6 +148,12 @@
           "isMany": true
         },
         {
+          "name": "many",
+          "type": "Integer",
+          "isMany": true,
+          "xml": { "serialize" : "property" }
+        },
+        {
           "name": "id",
           "type": "String",
           "isAttr": true,

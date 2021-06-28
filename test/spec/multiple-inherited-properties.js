@@ -66,6 +66,30 @@ describe('Multiple Inherited Properties', function() {
       // then
       expect(xml).to.eql(expectedXml);
     });
+
+    it('should write collections from multiple namespaces', function() {
+
+      // given
+      var writer = createWriter(model);
+      var root = model.create('mh:MultipleInherited');
+
+      root.get('many').push(42);
+      root.get('props:many').push(23);
+
+      // when
+      var xml = writer.toXML(root);
+      console.log(xml);
+
+      var expectedXml =
+          '<mh:MultipleInherited xmlns:mh="http://multipleinheritance"' +
+          ' xmlns:props="http://properties">' +
+            '<props:many>23</props:many>' +
+            '<mh:many>42</mh:many>' +
+          '</mh:MultipleInherited>';
+
+      // then
+      expect(xml).to.eql(expectedXml);
+    });
   }); // describe(multiple inherited properties/Writer)
 
   describe('Reader', function() {
