@@ -167,6 +167,12 @@
         {
           "name": "nonAttrSingle",
           "type": "Integer"
+        },
+        {
+          "name": "many",
+          "type": "Integer",
+          "isMany": true,
+          "xml": { "serialize" : "property" }
         }
       ]
     },

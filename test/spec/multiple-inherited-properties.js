@@ -71,6 +71,31 @@ describe('Multiple Inherited Properties', function() {
         expect(xml).to.eql(expectedXml);
       });
     }); // describe(multiple inherited properties/Writer/properties as containments)
+
+    describe('Collections', function() {
+      it('should write collections for multiple inherited types', function() {
+
+        // given
+        var writer = createWriter(model);
+        var root = model.create('mi:MultipleInherited');
+
+        root.get('many').push('mi-many');
+        root.get('props:many').push(23);
+
+        // when
+        var xml = writer.toXML(root);
+
+        var expectedXml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
+            ' xmlns:props="http://properties">' +
+            '<props:many>23</props:many>' +
+            '<mi:many>mi-many</mi:many>' +
+            '</mi:MultipleInherited>';
+
+        // then
+        expect(xml).to.eql(expectedXml);
+      });
+    }); // describe(multiple inherited properties/Writer/Collections)
   }); // describe(multiple inherited properties/Writer)
 
   describe('Reader', function() {

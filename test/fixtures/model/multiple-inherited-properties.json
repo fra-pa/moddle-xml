@@ -31,6 +31,12 @@
         {
           "name": "nonAttrSingle",
           "type": "Integer"
+        },
+        {
+          "name": "many",
+          "type": "String",
+          "isMany": true,
+          "xml": { "serialize" : "property" }
         }
       ]
     }
