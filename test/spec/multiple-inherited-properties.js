@@ -19,53 +19,58 @@ describe('Multiple Inherited Properties', function() {
       return new Writer(assign({ preamble: false }, options || {}));
     }
 
-    it('should write properties from multiple namespaces', function() {
+    describe('properties as attributes', function() {
+      it('should write attributes for multiple inherited types', function() {
 
-      // given
-      var writer = createWriter(model);
+        // given
+        var writer = createWriter(model);
 
-      var root = model.create('mi:MultipleInherited', {
-        'id': 'Root_1',
-        'single': 'mi-single',
-        'props:single': 42
+        var root = model.create('mi:MultipleInherited', {
+          'id': 'Root_1',
+          'single': 'mi-single',
+          'props:single': 42
+        });
+
+        // when
+        var xml = writer.toXML(root);
+
+        var expectedXml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
+            ' xmlns:props="http://properties" props:id="Root_1"' +
+            ' props:single="42"' +
+            ' single="mi-single" />';
+
+        // then
+        expect(xml).to.eql(expectedXml);
       });
+    }); // describe(multiple inherited properties/Writer/properties as attributes)
 
-      // when
-      var xml = writer.toXML(root);
+    describe('properties as containments', function() {
 
-      var expectedXml =
-          '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
-          ' xmlns:props="http://properties" props:id="Root_1"' +
-          ' props:single="42"' +
-          ' single="mi-single" />';
+      it('should write containments', function() {
 
-      // then
-      expect(xml).to.eql(expectedXml);
-    });
+        // given
+        var writer = createWriter(model);
 
-    it('should write non-attribute property as child element', function() {
+        var root = model.create('mi:MultipleInherited', {
+          'nonAttrSingle': 'mi-nonAttrSingle',
+          'props:nonAttrSingle': 42
+        });
 
-      // given
-      var writer = createWriter(model);
+        // when
+        var xml = writer.toXML(root);
 
-      var root = model.create('mi:MultipleInherited', {
-        'nonAttrSingle': 'mi-nonAttrSingle',
-        'props:nonAttrSingle': 42
+        var expectedXml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
+            ' xmlns:props="http://properties">' +
+            '<props:nonAttrSingle>42</props:nonAttrSingle>' +
+            '<mi:nonAttrSingle>mi-nonAttrSingle</mi:nonAttrSingle>' +
+            '</mi:MultipleInherited>';
+
+        // then
+        expect(xml).to.eql(expectedXml);
       });
-
-      // when
-      var xml = writer.toXML(root);
-
-      var expectedXml =
-          '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
-          ' xmlns:props="http://properties">' +
-          '<props:nonAttrSingle>42</props:nonAttrSingle>' +
-          '<mi:nonAttrSingle>mi-nonAttrSingle</mi:nonAttrSingle>' +
-          '</mi:MultipleInherited>';
-
-      // then
-      expect(xml).to.eql(expectedXml);
-    });
+    }); // describe(multiple inherited properties/Writer/properties as containments)
   }); // describe(multiple inherited properties/Writer)
 
   describe('Reader', function() {
