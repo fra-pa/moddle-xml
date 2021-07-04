@@ -1,7 +1,7 @@
 {
   "name": "MultipleInheritance",
   "uri": "http://multipleinheritance",
-  "prefix": "mh",
+  "prefix": "mi",
   "types": [
     {
       "name": "AnotherRoot",
