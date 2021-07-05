@@ -19,8 +19,9 @@ describe('Multiple Inherited Properties', function() {
       return new Writer(assign({ preamble: false }, options || {}));
     }
 
-    describe('properties as attributes', function() {
-      it('should write attributes for multiple inherited types', function() {
+    describe('Attributes', function() {
+
+      it('should write simple typed attributes', function() {
 
         // given
         var writer = createWriter(model);
@@ -44,11 +45,11 @@ describe('Multiple Inherited Properties', function() {
         // then
         expect(xml).to.eql(expectedXml);
       });
-    }); // describe(multiple inherited properties/Writer/properties as attributes)
+    }); // describe(multiple inherited properties/Writer/Attributes)
 
-    describe('properties as containments', function() {
+    describe('Containments', function() {
 
-      it('should write containments', function() {
+      it('should write simple typed containments', function() {
 
         // given
         var writer = createWriter(model);
@@ -71,10 +72,11 @@ describe('Multiple Inherited Properties', function() {
         // then
         expect(xml).to.eql(expectedXml);
       });
-    }); // describe(multiple inherited properties/Writer/properties as containments)
+    }); // describe(multiple inherited properties/Writer/Containments)
 
     describe('Collections', function() {
-      it('should write collections for multiple inherited types', function() {
+
+      it('should write simple typed collections', function() {
 
         // given
         var writer = createWriter(model);
@@ -104,9 +106,9 @@ describe('Multiple Inherited Properties', function() {
     // given
     var reader = new Reader(model);
 
-    describe('properties as attributes', function() {
+    describe('Attributes', function() {
 
-      it('should read simple types', async function() {
+      it('should read simple typed attributes', async function() {
 
         // given
         var rootHandler = reader.handler('mi:MultipleInherited');
@@ -136,11 +138,11 @@ describe('Multiple Inherited Properties', function() {
         expect(warnings).to.eql([]);
         expect(references).to.eql([]);
       });
-    }); // describe(multiple inherited properties/Reader/properties as attributes)
+    }); // describe(multiple inherited properties/Reader/Attributes)
 
     describe('Collections', function() {
 
-      it('should read simple types', async function() {
+      it('should read simple typed collections', async function() {
 
         // given
         var rootHandler = reader.handler('mi:MultipleInherited');
