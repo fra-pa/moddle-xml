@@ -140,6 +140,41 @@ describe('Multiple Inherited Properties', function() {
       });
     }); // describe(multiple inherited properties/Reader/Attributes)
 
+    describe('Containments', function() {
+
+      it('should read simple typed containments', async function() {
+
+        // given
+        var rootHandler = reader.handler('mi:MultipleInherited');
+        var xml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+              '<props:nonAttrSingle>42</props:nonAttrSingle>' +
+              '<mi:nonAttrSingle>mi-nonAttrSingle</mi:nonAttrSingle>' +
+            '</mi:MultipleInherited>';
+
+        // when
+        var {
+          rootElement,
+          elementsById,
+          warnings,
+          references
+        } = await reader.fromXML(xml, rootHandler);
+
+        var expectedElement = model.create('mi:MultipleInherited', {
+          'props:nonAttrSingle': 42,
+          'nonAttrSingle': 'mi-nonAttrSingle'
+        });
+
+        // then
+        expect(elementsById).to.eql({});
+        expect(rootElement).to.exist;
+        expect(rootElement).to.jsonEqual(expectedElement);
+        expect(warnings).to.eql([]);
+        expect(references).to.eql([]);
+      });
+    }); // describe(multiple inherited properties/Reader/Containments)
+
     describe('Collections', function() {
 
       it('should read simple typed collections', async function() {

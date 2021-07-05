@@ -30,7 +30,7 @@
         },
         {
           "name": "nonAttrSingle",
-          "type": "Integer"
+          "type": "String"
         },
         {
           "name": "many",
