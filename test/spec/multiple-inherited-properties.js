@@ -137,5 +137,41 @@ describe('Multiple Inherited Properties', function() {
         expect(references).to.eql([]);
       });
     }); // describe(multiple inherited properties/Reader/properties as attributes)
+
+    describe('Collections', function() {
+
+      it('should read simple types', async function() {
+
+        // given
+        var rootHandler = reader.handler('mi:MultipleInherited');
+        var xml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+            '  <props:many>23</props:many>' +
+            '  <mi:many>mi-many</mi:many>' +
+            '</mi:MultipleInherited>';
+
+        // when
+        var {
+          rootElement,
+          elementsById,
+          warnings,
+          references
+        } = await reader.fromXML(xml, rootHandler);
+
+        var expectedElement = {
+          '$type': 'mi:MultipleInherited',
+          'props:many': [ 23 ],
+          many: [ 'mi-many' ]
+        };
+
+        // then
+        expect(elementsById).to.eql({});
+        expect(rootElement).to.exist;
+        expect(rootElement).to.jsonEqual(expectedElement);
+        expect(warnings).to.eql([]);
+        expect(references).to.eql([]);
+      });
+    }); // describe(multiple inherited properties/Reader/Collections)
   }); // describe(multiple inherited properties/Reader)
 }); // describe(multiple inherited properties)
