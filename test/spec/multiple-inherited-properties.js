@@ -35,10 +35,11 @@ describe('Multiple Inherited Properties', function() {
         var xml = writer.toXML(root);
 
         var expectedXml =
-            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
-            ' xmlns:props="http://properties" props:id="Root_1"' +
-            ' props:single="42"' +
-            ' single="mi-single" />';
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties" ' +
+                                  'props:id="Root_1" ' +
+                                  'props:single="42" ' +
+                                  'single="mi-single" />';
 
         // then
         expect(xml).to.eql(expectedXml);
@@ -61,10 +62,10 @@ describe('Multiple Inherited Properties', function() {
         var xml = writer.toXML(root);
 
         var expectedXml =
-            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
-            ' xmlns:props="http://properties">' +
-            '<props:nonAttrSingle>42</props:nonAttrSingle>' +
-            '<mi:nonAttrSingle>mi-nonAttrSingle</mi:nonAttrSingle>' +
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+              '<props:nonAttrSingle>42</props:nonAttrSingle>' +
+              '<mi:nonAttrSingle>mi-nonAttrSingle</mi:nonAttrSingle>' +
             '</mi:MultipleInherited>';
 
         // then
@@ -86,10 +87,10 @@ describe('Multiple Inherited Properties', function() {
         var xml = writer.toXML(root);
 
         var expectedXml =
-            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance"' +
-            ' xmlns:props="http://properties">' +
-            '<props:many>23</props:many>' +
-            '<mi:many>mi-many</mi:many>' +
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+              '<props:many>23</props:many>' +
+              '<mi:many>mi-many</mi:many>' +
             '</mi:MultipleInherited>';
 
         // then
@@ -110,10 +111,9 @@ describe('Multiple Inherited Properties', function() {
         // given
         var rootHandler = reader.handler('mi:MultipleInherited');
         var xml =
-            '<mi:MultipleInherited ' +
-            'xmlns:mi="http://multipleinheritance" ' +
-            'xmlns:props="http://properties" ' +
-            'props:single="42" single="mi-single" />';
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties" ' +
+                                  'props:single="42" single="mi-single" />';
 
         // when
         var {
