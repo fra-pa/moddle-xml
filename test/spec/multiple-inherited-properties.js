@@ -100,38 +100,42 @@ describe('Multiple Inherited Properties', function() {
 
   describe('Reader', function() {
 
-    it('should read properties from multiple namespaces', async function() {
+    // given
+    var reader = new Reader(model);
 
-      // given
-      var reader = new Reader(model);
-      var rootHandler = reader.handler('mi:MultipleInherited');
+    describe('properties as attributes', function() {
 
-      var xml =
-          '<mi:MultipleInherited ' +
-          'xmlns:mi="http://multipleinheritance" ' +
-          'xmlns:props="http://properties" ' +
-          'props:single="42" single="mi-single" />';
+      it('should read simple types', async function() {
 
-      // when
-      var {
-        rootElement,
-        elementsById,
-        warnings,
-        references
-      } = await reader.fromXML(xml, rootHandler);
+        // given
+        var rootHandler = reader.handler('mi:MultipleInherited');
+        var xml =
+            '<mi:MultipleInherited ' +
+            'xmlns:mi="http://multipleinheritance" ' +
+            'xmlns:props="http://properties" ' +
+            'props:single="42" single="mi-single" />';
 
-      var expectedElement = {
-        '$type': 'mi:MultipleInherited',
-        'props:single': 42,
-        single: 'mi-single'
-      };
+        // when
+        var {
+          rootElement,
+          elementsById,
+          warnings,
+          references
+        } = await reader.fromXML(xml, rootHandler);
 
-      // then
-      expect(elementsById).to.eql({});
-      expect(rootElement).to.exist;
-      expect(rootElement).to.jsonEqual(expectedElement);
-      expect(warnings).to.eql([]);
-      expect(references).to.eql([]);
-    });
+        var expectedElement = {
+          '$type': 'mi:MultipleInherited',
+          'props:single': 42,
+          single: 'mi-single'
+        };
+
+        // then
+        expect(elementsById).to.eql({});
+        expect(rootElement).to.exist;
+        expect(rootElement).to.jsonEqual(expectedElement);
+        expect(warnings).to.eql([]);
+        expect(references).to.eql([]);
+      });
+    }); // describe(multiple inherited properties/Reader/properties as attributes)
   }); // describe(multiple inherited properties/Reader)
 }); // describe(multiple inherited properties)
