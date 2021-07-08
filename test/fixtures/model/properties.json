@@ -172,7 +172,14 @@
           "name": "many",
           "type": "Integer",
           "isMany": true,
-          "xml": { "serialize" : "property" }
+          "xml": { "serialize": "property" }
+        },
+        {
+          "name": "root",
+          "type": "Root",
+          "xml": {
+            "serialize": "property"
+          }
         }
       ]
     },

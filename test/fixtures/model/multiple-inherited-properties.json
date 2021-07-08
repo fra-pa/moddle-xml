@@ -36,7 +36,14 @@
           "name": "many",
           "type": "String",
           "isMany": true,
-          "xml": { "serialize" : "property" }
+          "xml": { "serialize": "property" }
+        },
+        {
+          "name": "root",
+          "type": "MultipleInherited",
+          "xml": {
+            "serialize": "property"
+          }
         }
       ]
     }
