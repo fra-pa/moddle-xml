@@ -74,7 +74,7 @@ describe('Multiple Inherited Properties', function() {
       });
 
       describe('complex types', function() {
-        it('should write complex typed containments', function() {
+        it('should write complex typed containments for other ns', function() {
 
           // given
           var writer = createWriter(model);
@@ -94,6 +94,31 @@ describe('Multiple Inherited Properties', function() {
               '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
                                     'xmlns:props="http://properties">' +
                 '<props:root props:single="42" />' +
+              '</mi:MultipleInherited>';
+
+          // then
+          expect(xml).to.eql(expectedXml);
+        });
+
+        it('should write complex typed containments for local ns', function() {
+
+          // given
+          var writer = createWriter(model);
+
+          var containedRoot = model.create('mi:MultipleInherited', {
+            single: 'mi-single'
+          });
+
+          var root = model.create('mi:MultipleInherited', {
+            root: containedRoot
+          });
+
+          // when
+          var xml = writer.toXML(root);
+
+          var expectedXml =
+              '<mi:MultipleInherited xmlns:mi="http://multipleinheritance">' +
+                '<mi:root single="mi-single" />' +
               '</mi:MultipleInherited>';
 
           // then
