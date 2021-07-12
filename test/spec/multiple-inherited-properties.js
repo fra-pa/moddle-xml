@@ -124,6 +124,38 @@ describe('Multiple Inherited Properties', function() {
           // then
           expect(xml).to.eql(expectedXml);
         });
+
+        it('should write complex typed containments for all ns', function() {
+
+          // given
+          var writer = createWriter(model);
+
+          var localContainedRoot = model.create('mi:MultipleInherited', {
+            single: 'mi-single'
+          });
+
+          var otherContainedRoot = model.create('props:Root', {
+            'single': 42
+          });
+
+          var root = model.create('mi:MultipleInherited', {
+            root: localContainedRoot,
+            'props:root': otherContainedRoot
+          });
+
+          // when
+          var xml = writer.toXML(root);
+
+          var expectedXml =
+              '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                    'xmlns:props="http://properties">' +
+                '<props:root single="42" />' +
+                '<mi:root single="mi-single" />' +
+              '</mi:MultipleInherited>';
+
+          // then
+          expect(xml).to.eql(expectedXml);
+        });
       }); // describe(multiple inherited properties/Writer/Containments/complex types)
     }); // describe(multiple inherited properties/Writer/Containments)
 
