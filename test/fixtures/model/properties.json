@@ -180,6 +180,14 @@
           "xml": {
             "serialize": "property"
           }
+        },
+        {
+          "name": "anyAsProperty",
+          "type": "BaseWithId",
+          "isMany": true,
+          "xml": {
+            "serialize": "property"
+          }
         }
       ]
     },

@@ -10,6 +10,14 @@
           "name": "any",
           "type": "AnotherRoot",
           "isMany": true
+        },
+        {
+          "name": "anyAsProperty",
+          "type": "props:BaseWithNumericId",
+          "isMany": true,
+          "xml": {
+            "serialize": "property"
+          }
         }
       ]
     },

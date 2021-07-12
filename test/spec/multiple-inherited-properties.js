@@ -183,6 +183,37 @@ describe('Multiple Inherited Properties', function() {
         // then
         expect(xml).to.eql(expectedXml);
       });
+
+      it('should write complex typed collections', function() {
+
+        // given
+        var writer = createWriter(model);
+        var root = model.create('mi:MultipleInherited');
+
+        var localBase = model.create('props:BaseWithNumericId', {
+          idNumeric: '42'
+        });
+
+        var otherBase = model.create('props:BaseWithNumericId', {
+          idNumeric: '23'
+        });
+
+        root.get('anyAsProperty').push(localBase);
+        root.get('props:anyAsProperty').push(otherBase);
+
+        // when
+        var xml = writer.toXML(root);
+
+        var expectedXml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+              '<mi:anyAsProperty idNumeric="42" />' +
+              '<props:anyAsProperty idNumeric="23" />' +
+            '</mi:MultipleInherited>';
+
+        // then
+        expect(xml).to.eql(expectedXml);
+      });
     }); // describe(multiple inherited properties/Writer/Collections)
   }); // describe(multiple inherited properties/Writer)
 
