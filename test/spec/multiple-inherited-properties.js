@@ -325,6 +325,50 @@ describe('Multiple Inherited Properties', function() {
         expect(warnings).to.eql([]);
         expect(references).to.eql([]);
       });
+
+      it('should read complex typed collections', async function() {
+
+        // given
+        var rootHandler = reader.handler('mi:MultipleInherited');
+        var xml =
+            '<mi:MultipleInherited xmlns:mi="http://multipleinheritance" ' +
+                                  'xmlns:props="http://properties">' +
+            '  <mi:anyAsProperty idNumeric="mi-42" />' +
+            '  <props:anyAsProperty id="props-23" />' +
+            '</mi:MultipleInherited>';
+
+        // when
+        var {
+          rootElement,
+          elementsById,
+          warnings,
+          references
+        } = await reader.fromXML(xml, rootHandler);
+
+        var localBase = model.create('props:BaseWithNumericId', {
+          idNumeric: 'mi-42'
+        });
+
+        var otherBase = model.create('props:BaseWithId', {
+          id: 'props-23'
+        });
+
+        var expectedElement = {
+          '$type': 'mi:MultipleInherited',
+          anyAsProperty: [ localBase ],
+          'props:anyAsProperty': [ otherBase ]
+        };
+
+        // then
+        expect(elementsById['mi-42']).to.exist;
+        expect(elementsById['mi-42']).to.jsonEqual(localBase);
+        expect(elementsById['props-23']).to.exist;
+        expect(elementsById['props-23']).to.jsonEqual(otherBase);
+        expect(rootElement).to.exist;
+        expect(rootElement).to.jsonEqual(expectedElement);
+        expect(warnings).to.eql([]);
+        expect(references).to.eql([]);
+      });
     }); // describe(multiple inherited properties/Reader/Collections)
   }); // describe(multiple inherited properties/Reader)
 }); // describe(multiple inherited properties)
